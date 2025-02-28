@@ -1,0 +1,54 @@
+.container-color{
+    background-color: rgb(246, 246, 246);
+}
+
+.addproduct-container{
+    height: auto;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.product{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.productdetails{
+    padding: 10px;
+}
+
+.header{
+    font-size: 30px;
+    padding-top: 80px;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+.productdetails input{
+     font-size: 12px;
+     border-radius: 5px;
+     border: 1px solid black;
+}
+
+.submitProduct{
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: rgb(82, 181, 231);
+    border: 1px solid rgb(0, 183, 255);
+    border-radius: 5px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+input[type="file"]{
+   cursor: pointer;
+}
