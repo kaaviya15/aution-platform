@@ -12,7 +12,7 @@ const product_modelSchema=new Schema({
         required:true
     },
     image:{
-        type:Image,
+        type:String,
         required:true
     },
     cost:{
@@ -20,18 +20,15 @@ const product_modelSchema=new Schema({
         required:true
     },
     start_time:{
-        type:time,
+        type:Date,
         required:true
     },
-    status:{
-        type:String,
+    end_time:{
+        type:Date,
         required:true
     },
-    current_highest_bid:{
-        type:Number,
-        required:true
-    }
+    
 });
 
-const Product=mongoose.model("Product",product_modelSche);
+const Product=mongoose.model("Product",product_modelSchema);
 module.exports=Product;
