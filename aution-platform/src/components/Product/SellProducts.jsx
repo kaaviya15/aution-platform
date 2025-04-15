@@ -52,11 +52,14 @@ const SellProducts = () => {
 
     const handleForm = async (e)=>{
       e.preventDefault();
+
+      const token = localStorage.getItem("token");
+     console.log(token);
       const Data=new FormData();
       Data.append("name",formData.name);
       Data.append("description",formData.description);
       Data.append("image",image);
-      Data.append("cost",formData.cost);
+      Data.append("cost",Number(formData.cost));
       Data.append("start_time",formData.start_time);
       Data.append("end_time",formData.end_time);
 
@@ -66,14 +69,18 @@ const SellProducts = () => {
         
         if(id){
           await axios.put(`${API_BASE_URL}/api/user/updateById/${id}`,Data,{
-            headers:{"Content-Type":"multipart/form-data"}
+            headers:{
+              Authorization:`Bearer ${token}`,
+              "Content-Type":"multipart/form-data"}
           });
         }
 
 else{
 
         const response =await axios.post(`${API_BASE_URL}${endpoint}`,Data,{
-          headers:{"Content-Type":"multipart/form-data"}
+          headers:{
+            Authorization: `Bearer ${token}`,
+            "Content-Type":"multipart/form-data"}
         });
         console.log(response.data);
       }

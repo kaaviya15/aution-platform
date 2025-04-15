@@ -48,12 +48,18 @@ const LoginSignUp = ({ setIsLoggedIn, setUserRole }) => {
 
     try {
       const response = await axios.post(`${API_BASE_URL}${endpoint}`, userData);
-
+      // const user=response.data.user;
+      localStorage.setItem("userId",response.data.user.id);
+      console.log(response.data.user);
+      console.log(response.data.user.id);
+      localStorage.setItem("token", response.data.token);
       if (response.status === 200 || response.status === 201) {
         alert(response.data.message);
 
         const userRoleFromResponse =
           response.data.user?.roles?.[0]?.toLowerCase() || role.toLowerCase();
+        
+         console.log(localStorage.setItem("token", response.data.token));
 
         setIsLoggedIn(true);
         setUserRole(userRoleFromResponse);

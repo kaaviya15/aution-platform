@@ -27,6 +27,12 @@ const product_modelSchema=new Schema({
         type:Date,
         required:true
     },
+
+    seller:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        required:true,
+    }
     
 });
 

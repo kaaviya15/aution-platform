@@ -33,7 +33,7 @@ const Navbar = ({ isLoggedIn, userRole, setIsLoggedIn, setUserRole }) => {
       <ul className="nav-links">
         {role === "seller" && <li><Link to="/SellProducts">Add Product</Link></li>}
         {role === "seller" ? <li><Link to="/sellerdashboard">Dashboard</Link></li> : <li><Link to="/buyerdashboard">Dashboard</Link></li>}
-        <li><Link to="/hotsales">Hot Sales</Link></li>
+        <li><Link to="/get_hotSales">Hot Sales</Link></li>
         {loggedin ? (
           <li><button onClick={handleLogout} className="logout">Logout</button></li>
         ) : (

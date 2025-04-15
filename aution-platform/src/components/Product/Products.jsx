@@ -13,6 +13,11 @@ const Products = () => {
     
 
     function handleBid(id){
+      // const now=new Date();
+      // const end=new Date(end_time);
+      // if(now>=end){
+      //   alert("Bidding has ended for this project");
+      // }
         navigator(`/product/${id}`);
     }
     
@@ -29,12 +34,17 @@ const Products = () => {
 
      console.log(products);
 
+     function isDisabled(end_time){
+      return new Date()>=new Date(end_time);
+     }
+
   return (
     <div className='product-container'>
     
       {
        products.map((Item)=>{
             return (
+              
                 <div key={Item._id} className='product-item'>
                     <div className='item-name'>{Item.name.toUpperCase()}</div>
                     
@@ -45,8 +55,9 @@ const Products = () => {
             endTime={Item.end_time} 
           />
                     <div>₹{Item.cost}</div>
-                    <button className='button' onClick={()=>handleBid(Item._id)}>Add Bid</button>
+                    <button className='button' disabled={isDisabled(Item.end_time)} onClick={()=>handleBid(Item._id)}>Add Bid</button>
                     </div>
+                 
             )
         })
       }

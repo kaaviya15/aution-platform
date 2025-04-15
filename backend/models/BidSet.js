@@ -1,18 +1,24 @@
 const mongoose=require('mongoose');
 
-const Schema=mongoose.Schema;
-const BidSetSchema=new Schema({
-    productId:{
-        type:String,
+
+const BidSetSchema=new mongoose.Schema({
+    product:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Products',
         required:true
     },
+    bidder:{
+       type:mongoose.Schema.Types.ObjectId,
+       ref:'User',
+       required:true
+    },
     bidAmount:{
-        type:String,
+        type:Number,
         required:true
     },
     bidTime:{
-        type:String,
-        required:true
+        type:Date,
+        default:Date.now
     },
 
 });

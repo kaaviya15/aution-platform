@@ -9,16 +9,26 @@ const SellerDashBoard = () => {
     const navigate=useNavigate();
 
     const[products,setProducts]=useState([]);
-    // const[Loading,setLoading]=useState(true);
+
    const API_BASE_URL=import.meta.env.VITE_API_URL;
-   const endpoint="/api/user/getProducts";
+   const endpoint="/api/user/my-products";
     useEffect(()=>{
-        const fetchProduct= async()=>{
-           const response=await axios.get(`${API_BASE_URL}${endpoint}`);
-           const products=response.data;
-           setProducts(products);
-        };
-        fetchProduct();
+
+        const token=localStorage.getItem("token");
+        axios.get(`${API_BASE_URL}${endpoint}`,{
+            headers:{
+                Authorization:`Bearer ${token}`,
+            },
+        }).then((res)=>{
+             setProducts(res.data);
+        }).catch((err)=>{
+            console.error("Failed to fetch seller's product",err);
+            if(err.response.status === 401){
+                localStorage.removeItem("token");
+              
+            }
+        });
+
     },[]);
 
 
@@ -45,17 +55,18 @@ const SellerDashBoard = () => {
                 
                 <tbody>
                     {
-                       products.map((product)=>{
-                         return  <tr key={product._id} className="prod-row">
+                       products.map((product,i)=>{
+                         return  <tr key={i} className="prod-row">
                          
                             <td>{product.name}</td>
                             <td>{new Date(product.start_time).toLocaleTimeString()} - {new Date(product.start_time).toLocaleDateString()}</td>
                             <td>{new Date(product.end_time).toLocaleTimeString()} - {new Date(product.end_time).toLocaleDateString()}</td>
                             <td>{product.cost}</td>
                             <td>{new Date(product.end_time) < new Date() ? "TimeOut" : "Available"}</td>
+                            <td>
                             <button onClick={()=>navigate(`/sellproducts/${product._id}`)}>update</button>
                             <button onClick={()=>removeProduct(product._id)}>remove</button>
-                      </tr>
+                            </td>  </tr>
                         
                        })
                     }

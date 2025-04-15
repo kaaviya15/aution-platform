@@ -30,8 +30,9 @@ try{
          cost,
          start_time,
          end_time,
+         seller:req.user._id,
     });
-
+   await newProduct.save();
     return res.status(201).json({
         message:"successfully created",
         product:{
@@ -42,6 +43,7 @@ try{
             start_time:newProduct.start_time,
             end_time:newProduct.end_time,
             image:newProduct.image,
+            seller:req.user._id,
         }
     });
 }
@@ -133,5 +135,15 @@ catch(err){
 };
 
 
+const getSellerProducts=async(req,res)=>{
+try{
+  const products=await Product.find({seller:req.user._id});
+  return res.status(200).json(products);
+}
+catch(err){
+    res.status(500).json({messase:"Server error",error:err.message});
+}
+};
 
-module.exports={regProduct,getAllProduct,getById,deleteById,updateById};
+
+module.exports={regProduct,getAllProduct,getById,deleteById,updateById,getSellerProducts};
